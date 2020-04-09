@@ -10,7 +10,7 @@ namespace TP_Cargaison_LIAGE3_GLRS3.dao
   
     class DaoCargaison:ICargaison<Cargaison>
     {
-        private List<Cargaison> cargaisons=new List<Cargaison>();
+        private static List<Cargaison> cargaisons=new List<Cargaison>();
 
         public DaoCargaison()
         {
@@ -33,11 +33,11 @@ namespace TP_Cargaison_LIAGE3_GLRS3.dao
 
         }
 
-        public  List<Cargaison> Cargaisons { get => cargaisons; set => cargaisons = value; }
+        public static List<Cargaison> Cargaisons { get => cargaisons; set => cargaisons = value; }
         
-        public List<Cargaison> getAll()
+        public  List<Cargaison> getAll()
         {
-            return this.Cargaisons;
+            return Cargaisons;
         }
 
         public bool add(Cargaison cargaison)

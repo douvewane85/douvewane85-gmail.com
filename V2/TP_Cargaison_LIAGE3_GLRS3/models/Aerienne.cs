@@ -30,7 +30,7 @@ namespace TP_Cargaison_LIAGE3_GLRS3.models
 
         public override string ToString()
         {
-            return base.ToString()+" Cout: "+ Cout();
+            return base.ToString();
         }
     }
 }

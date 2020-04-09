@@ -16,6 +16,7 @@ namespace TP_Cargaison_LIAGE3_GLRS3
     {
         private CargaisonService service = new CargaisonService();
         private List<Cargaison> cargaisons;
+        Cargaison cargaisonSelect;
         public Form1()
         {
             InitializeComponent();
@@ -30,10 +31,10 @@ namespace TP_Cargaison_LIAGE3_GLRS3
             
             foreach (Cargaison car in cargaisons)
             {
-                listViewCargaison.Items.Add(car.ToString());
+                listViewCargaison.Items.Add(car);
             }
 
-            listViewCargaison.Items[0].Selected = true;
+            listViewCargaison.SelectedIndex=0;
 
             
 
@@ -70,8 +71,37 @@ namespace TP_Cargaison_LIAGE3_GLRS3
 
         private void listViewCargaison_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Cargaison cargaisonSelect = null;
-            dgvMarchandises.DataSource = service.ListerMarchandiseDUneGargaison(cargaisonSelect);
+            
        }
+
+        private void listViewCargaison_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            
+            cargaisonSelect = (Cargaison)listViewCargaison.SelectedItem;
+            
+            dgvMarchandises.DataSource = service.ListerMarchandiseDUneGargaison(cargaisonSelect);
+
+            txtPoidsTotal.Text = cargaisonSelect.PoidsTotal.ToString();
+            txtVolumeTotal.Text = cargaisonSelect.VolumeTotal.ToString();
+            txtCout.Text = cargaisonSelect.Cout().ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            service.AddMarchandiseInGargaison(
+                new Marchandise()
+                {
+                    Poid = int.Parse(txtPoids.Text),
+                    Volume = int.Parse(txtVolume.Text),
+                    Cargaison = cargaisonSelect
+
+                }
+                );
+            dgvMarchandises.DataSource = service.ListerMarchandiseDUneGargaison(cargaisonSelect);
+
+            txtPoidsTotal.Text = cargaisonSelect.PoidsTotal.ToString();
+            txtVolumeTotal.Text = cargaisonSelect.VolumeTotal.ToString();
+            txtCout.Text = cargaisonSelect.Cout().ToString();
+        }
     }
 }

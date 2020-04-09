@@ -31,14 +31,16 @@ namespace TP_Cargaison_LIAGE3_GLRS3.services
             return daoCarg.getAll();
              
         }
-        public void AddMarchandiseInGargaison()
+        public void AddMarchandiseInGargaison( Marchandise mar)
         {
-
+            daoMar.add(mar);
+                
         }
 
         public List<Marchandise> ListerMarchandiseDUneGargaison(Cargaison cargaison)
         {
            return daoMar.getMarchandiseByCargaison(cargaison);
+            
         }
 
 
